@@ -3,11 +3,17 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const express = require('express');
 const mongoose = require('mongoose');
 
+// Import authentication routes
+const authRoutes = require('./routes/authRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
+
+// Mount authentication routes
+app.use('/api/auth', authRoutes);
 
 // Root GET route to verify backend status
 app.get('/', (req, res) => {
